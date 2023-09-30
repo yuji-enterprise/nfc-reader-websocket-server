@@ -1,0 +1,45 @@
+<html>
+  <head></head>
+  <body>
+    <script type="text/javascript">
+      var wsuri = "ws://127.0.0.1:8899/card-reader";
+      let ws = null;
+
+      function connect() {
+              console.log("Start");
+              ws = new WebSocket(wsuri);
+
+              ws.onopen = function() {
+                      console.log("connected to " + wsuri);
+                    }
+
+              ws.onclose = function(e) {
+                      console.log("connection closed (" + e.code + ")");
+                    }
+
+              ws.onmessage = function(e) {
+                      console.log("message received: " + e.data);
+                    }
+            }
+
+      function disconnect() {
+              console.log("end");
+              ws.close(1000);
+            }
+
+      function send() {
+              let msg = document.getElementById('message').value;
+              ws.send(msg);
+            };
+    </script>
+    <h1>WebSocket Echo Test</h1>
+    <form>
+      <p>
+      Message: <input id="message" type="text" value="Hello, world!">
+      </p>
+    </form>
+    <button onclick="connect();">Connect</button>
+    <button onclick="disconnect();">Disconnect</button>
+    <button onclick="send();">Send Message</button>
+  </body>
+</html>

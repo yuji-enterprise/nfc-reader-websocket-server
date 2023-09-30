@@ -1,0 +1,7 @@
+*.swp
+*.swo
+.env
+.dev.env
+.debug.env
+.DS_Store
+nfc-reader-websocket-server
